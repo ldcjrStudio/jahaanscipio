@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  /* @font-face {
+/* @layer base { */
+/* @font-face {
     font-family: "Montserrat-Regular";
     font-weight: 400;
     src: url("../fonts/Montserrat-Regular.ttf") format("truetype");
@@ -13,4 +13,4 @@
     font-weight: 700;
     src: url("../fonts/Montserrat-Bold.ttf") format("truetype");
   } */
-}
+/* } */
