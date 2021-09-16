@@ -32,6 +32,7 @@ export default function Home({ projects }) {
     gsap.to(element, {
       height: "420px",
       width: "420px",
+      zIndex: "100",
     });
   };
 
