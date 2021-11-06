@@ -1,36 +1,82 @@
+//CORE
+import React, { useRef, useEffect } from "react";
 import getProjects from "../../lib/projects";
-// import Layout from "../../components/layout";
-import Image from "next/image";
+import useInView from "react-cool-inview";
+import gsap from "gsap";
 
-export default function Project({ projectData }) {
+import ImageComponent from "../../components/ImageComponent";
+
+import Image from "next/image";
+import marked from "marked";
+
+//COMPONENTS
+import Container from "../../components/container";
+
+if (typeof window !== "undefined") {
+  var imgs = document.querySelectorAll(".img-container");
+}
+
+function Project({ projectData }) {
   const project = projectData[0].fields;
 
-  return (
-    // <Layout>
-    <section className="project-content">
-      <div className="copy">
-        <h2>{project.Name}</h2>
+  window.addEventListener("scroll", function () {
+    console.log(imgs.getBoundingClientRect());
+  });
 
-        {/* <div
-          className="content content-1"
-          dangerouslySetInnerHTML={{ __html: project.Content }}
-        />
-        <div
-          className="content content-2"
-          dangerouslySetInnerHTML={{ __html: project.Content2 }}
-        /> */}
-      </div>
-      <div className="assets">
-        {/* {project.Images.map((image) => (
-          <div className="img-container">
-            <Image src={image.url} width={image.width} height={image.height} />
+  return (
+    <section className="project-content">
+      <Container addClass="grid grid-cols-2 gap-6">
+        <div className="copy relative ">
+          <div className="inner-content sticky inset-0 p-6">
+            <h2>{project.Name}</h2>
+            <div
+              id="content"
+              className="content content-1"
+              dangerouslySetInnerHTML={{
+                __html: marked(project.Content),
+              }}
+            />
+            <div
+              id="content1"
+              className="content"
+              dangerouslySetInnerHTML={{
+                __html: marked(project.Content2),
+              }}
+            />
+            <div
+              id="content2"
+              className="content content-"
+              dangerouslySetInnerHTML={{
+                __html: marked(project.Content3),
+              }}
+            />
+            <div
+              id="content3"
+              className="content"
+              dangerouslySetInnerHTML={{
+                __html: marked(project.Content3),
+              }}
+            />
           </div>
-        ))} */}
-      </div>
+        </div>
+        <div className="assets p-3">
+          {project.Images.map((image, i) => {
+            return (
+              <ImageComponent
+                key={i}
+                src={image.url}
+                width={image.width}
+                height={image.height}
+              />
+            );
+          })}
+        </div>
+      </Container>
     </section>
-    // </Layout>
   );
 }
+
+export default Project;
 
 export async function getStaticProps({ params }) {
   const projects = await getProjects();
@@ -48,9 +94,11 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const records = await getProjects();
+
   const paths = records.map((record) => ({
     params: { id: record.fields.Slug },
   }));
+  console.log(paths);
   return {
     paths,
     fallback: false,

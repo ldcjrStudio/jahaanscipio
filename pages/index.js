@@ -11,6 +11,7 @@ import ProjectModal from "../components/ProjectModal";
 import getProjects from "../lib/projects";
 
 export default function Home({ projects }) {
+  // console.log(projects);
   const projectRef = useRef([]);
   const [projectOpen, setProjectOpen] = useState(false);
 
@@ -74,13 +75,13 @@ export default function Home({ projects }) {
       ></div>
       <div
         id="projects-container"
-        className="h-full max-w-5xl mx-auto flex justify-around items-center"
+        className="h-full max-w-5xl mx-auto flex justify-center items-center flex-wrap"
       >
         {projects.map((project, i) =>
           project.fields.Status === "live" ? (
             <div
               key={project.id}
-              className="project-item border-2 border-black bg-white relative"
+              className="project-item border-2 border-black bg-white relative m-6"
               onClick={openProjectDrawer}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
