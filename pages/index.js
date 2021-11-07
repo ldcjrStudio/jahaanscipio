@@ -4,6 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
+import ProjectCard from "../components/ProjectCard";
 
 import ProjectModal from "../components/ProjectModal";
 
@@ -11,32 +12,32 @@ import ProjectModal from "../components/ProjectModal";
 import getProjects from "../lib/projects";
 
 export default function Home({ projects }) {
-  // console.log(projects);
-  const projectRef = useRef([]);
+  const days = [25, 26, 27, 28, 29];
+  const [expandedDay, setCollapsedDay] = useState();
+
+  // const projectRef = useRef([]);
   const [projectOpen, setProjectOpen] = useState(false);
+  // const openProjectDrawer = (event) => {
+  //   setProjectOpen(true);
+  //   let element = event.target.closest(".project-item");
 
-  const openProjectDrawer = (event) => {
-    setProjectOpen(true);
-    let element = event.target.closest(".project-item");
+  //   let windowHeight = window.innerHeight;
+  //   let windowWidth = window.innerWidth;
+  //   let leftDistance = element.getBoundingClientRect().left;
+  //   let topDistance = element.getBoundingClientRect().top;
 
-    let windowHeight = window.innerHeight;
-    let windowWidth = window.innerWidth;
-    let leftDistance = element.getBoundingClientRect().left;
-    let topDistance = element.getBoundingClientRect().top;
+  //   console.log(element.getBoundingClientRect());
 
-    console.log(element.getBoundingClientRect());
+  //   let transformX = windowWidth / 2 - leftDistance * 2 + "px";
 
-    let transformX = windowWidth / 2 - leftDistance * 2 + "px";
+  //   console.log(transformX);
 
-    console.log(transformX);
-
-    gsap.to(element, {
-      height: "420px",
-      width: "420px",
-      zIndex: "100",
-    });
-  };
-
+  //   gsap.to(element, {
+  //     height: "420px",
+  //     width: "420px",
+  //     zIndex: "100",
+  //   });
+  // };
   // const handleMouseEnter = (event) => {
   //   // console.log(projectRef.current);
   //   console.log(event.target.value);
@@ -50,21 +51,21 @@ export default function Home({ projects }) {
   //   });
   // };
 
-  function handleMouseEnter(event) {
-    if (!projectOpen) {
-      let element = event.target.closest(".project-item");
-      gsap.to(element, { scale: "1.2", duration: ".3", yoyo: true });
-    }
-  }
-  function handleMouseLeave(event) {
-    if (!projectOpen) {
-      let element = event.target.closest(".project-item");
-      gsap.to(element, {
-        scale: "1",
-        duration: ".3",
-      });
-    }
-  }
+  // function handleMouseEnter(event) {
+  //   if (!projectOpen) {
+  //     let element = event.target.closest(".project-item");
+  //     gsap.to(element, { scale: "1.2", duration: ".3", yoyo: true });
+  //   }
+  // }
+  // function handleMouseLeave(event) {
+  //   if (!projectOpen) {
+  //     let element = event.target.closest(".project-item");
+  //     gsap.to(element, {
+  //       scale: "1",
+  //       duration: ".3",
+  //     });
+  //   }
+  // }
 
   return (
     <section className="w-screen h-screen relative">
@@ -77,7 +78,7 @@ export default function Home({ projects }) {
         id="projects-container"
         className="h-full max-w-5xl mx-auto flex justify-center items-center flex-wrap"
       >
-        {projects.map((project, i) =>
+        {/* {projects.map((project, i) =>
           project.fields.Status === "live" ? (
             <div
               key={project.id}
@@ -103,7 +104,16 @@ export default function Home({ projects }) {
           ) : (
             ""
           )
-        )}
+        )} */}
+        {days.map((day) => (
+          <ProjectCard
+            key={day}
+            day={day}
+            disabled={expandedDay !== day && expandedDay !== undefined}
+            onExpand={() => setCollapsedDay(day)}
+            onCollapse={() => setCollapsedDay()}
+          />
+        ))}
       </div>
     </section>
   );

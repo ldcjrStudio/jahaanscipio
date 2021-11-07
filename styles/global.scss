@@ -85,3 +85,33 @@ header#header {
 #main-content {
   padding-left: 96px;
 }
+
+.expanded {
+  width: 10rem;
+  height: 10rem;
+  background-color: navy;
+  position: relative;
+  left: -100%;
+  top: 150%;
+}
+
+.compact {
+  width: 3rem;
+  height: 3rem;
+  padding: 0.5rem;
+  border-radius: 1.5rem;
+}
+.title {
+  color: navy;
+  font-weight: 800;
+  margin: 0;
+}
+
+.expanded .title {
+  font-size: 5em;
+  color: white;
+}
+
+.compact .title {
+  font-size: 1.5em;
+}
