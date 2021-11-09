@@ -76,7 +76,7 @@ export default function Home({ projects }) {
       ></div>
       <div
         id="projects-container"
-        className="h-full max-w-5xl mx-auto flex justify-center items-center flex-wrap"
+        className="h-full mx-auto flex justify-center items-center flex-wrap"
       >
         {/* {projects.map((project, i) =>
           project.fields.Status === "live" ? (
@@ -105,15 +105,19 @@ export default function Home({ projects }) {
             ""
           )
         )} */}
-        {days.map((day) => (
-          <ProjectCard
-            key={day}
-            day={day}
-            disabled={expandedDay !== day && expandedDay !== undefined}
-            onExpand={() => setCollapsedDay(day)}
-            onCollapse={() => setCollapsedDay()}
-          />
-        ))}
+        {projects.map((project, i) =>
+          project.fields.Status === "live" ? (
+            <ProjectCard
+              key={i}
+              project={project}
+              disabled={expandedDay !== project && expandedDay !== undefined}
+              onExpand={() => setCollapsedDay(project)}
+              onCollapse={() => setCollapsedDay()}
+            />
+          ) : (
+            ""
+          )
+        )}
       </div>
     </section>
   );

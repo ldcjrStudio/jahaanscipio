@@ -19,10 +19,6 @@ if (typeof window !== "undefined") {
 function Project({ projectData }) {
   const project = projectData[0].fields;
 
-  window.addEventListener("scroll", function () {
-    console.log(imgs.getBoundingClientRect());
-  });
-
   return (
     <section className="project-content">
       <Container addClass="grid grid-cols-2 gap-6">

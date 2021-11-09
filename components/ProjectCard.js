@@ -4,7 +4,7 @@ import CardContent from "../components/CardContent";
 import CompactCard from "../components/CompactCard";
 import ExpandedCard from "../components/ExpandedCard";
 
-function ProjectCard({ day, onCollapse, onExpand, disabled }) {
+function ProjectCard({ project, onCollapse, onExpand, disabled }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const collapseDate = () => {
     setIsExpanded(false);
@@ -16,15 +16,23 @@ function ProjectCard({ day, onCollapse, onExpand, disabled }) {
     onExpand();
   };
   return (
-    <div>
-      <AnimateSharedLayout>
+    <div className=" card-container m-6">
+      <AnimateSharedLayout type="crossfade">
         {isExpanded ? (
-          <ExpandedCard onCollapse={collapseDate} day={day}>
-            <CardContent projectData={day} disabled={disabled} />
+          <ExpandedCard onCollapse={collapseDate} project={project}>
+            <CardContent
+              project={project}
+              isExpanded={isExpanded}
+              disabled={disabled}
+            />
           </ExpandedCard>
         ) : (
-          <CompactCard onExpand={expandDate} disabled={disabled} day={day}>
-            <CardContent projectData={day} disabled={disabled} />
+          <CompactCard
+            onExpand={expandDate}
+            disabled={disabled}
+            project={project}
+          >
+            <CardContent project={project} disabled={disabled} />
           </CompactCard>
         )}
       </AnimateSharedLayout>

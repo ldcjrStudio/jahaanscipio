@@ -87,31 +87,49 @@ header#header {
 }
 
 .expanded {
-  width: 10rem;
-  height: 10rem;
-  background-color: navy;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+// .compact {
+//   width: 3rem;
+//   height: 3rem;
+//   padding: 0.5rem;
+//   border-radius: 1.5rem;
+// }
+// .title {
+//   color: navy;
+//   font-weight: 800;
+//   margin: 0;
+// }
+
+// .expanded .title {
+//   font-size: 5em;
+//   color: white;
+// }
+
+// .compact .title {
+//   font-size: 1.5em;
+// }
+
+.card {
+  overflow: hidden;
+
+  border-radius: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   position: relative;
-  left: -100%;
-  top: 150%;
+  cursor: pointer;
+}
+.card-container {
+  position: relative;
 }
 
-.compact {
-  width: 3rem;
-  height: 3rem;
-  padding: 0.5rem;
-  border-radius: 1.5rem;
-}
-.title {
-  color: navy;
-  font-weight: 800;
-  margin: 0;
-}
-
-.expanded .title {
-  font-size: 5em;
-  color: white;
-}
-
-.compact .title {
-  font-size: 1.5em;
+.project-item {
+  width: 150px;
+  height: auto;
 }
