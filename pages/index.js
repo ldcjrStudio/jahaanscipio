@@ -1,22 +1,26 @@
 //CORE
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
+import { ProjectContext } from "../context/projectContext";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
-import ProjectCard from "../components/ProjectCard";
-
-import ProjectModal from "../components/ProjectModal";
+import List from "../components/List";
+import Item from "../components/Item";
 
 //FUNCTIONS
 import getProjects from "../lib/projects";
+import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 
 export default function Home({ projects }) {
-  const days = [25, 26, 27, 28, 29];
-  const [expandedDay, setCollapsedDay] = useState();
+  const { id } = useContext(ProjectContext);
+  console.log(id);
+
+  // const days = [25, 26, 27, 28, 29];
+  // const [expandedDay, setCollapsedDay] = useState();
 
   // const projectRef = useRef([]);
-  const [projectOpen, setProjectOpen] = useState(false);
+  // const [projectOpen, setProjectOpen] = useState(false);
   // const openProjectDrawer = (event) => {
   //   setProjectOpen(true);
   //   let element = event.target.closest(".project-item");
@@ -70,14 +74,15 @@ export default function Home({ projects }) {
   return (
     <section className="w-screen h-screen relative">
       <div
-        className={`bg-blend-overlay bg-gray-600 opacity-50 absolute left-0 top-0 w-screen h-screen ${
-          projectOpen ? "block" : "hidden"
-        }`}
-      ></div>
-      <div
         id="projects-container"
         className="h-full mx-auto flex justify-center items-center flex-wrap"
       >
+        <AnimateSharedLayout type="crossfade">
+          <List selectedId={id} projects={projects} />
+          <AnimatePresence>
+            {id && <Item id={id} key="item" projects={projects} />}
+          </AnimatePresence>
+        </AnimateSharedLayout>
         {/* {projects.map((project, i) =>
           project.fields.Status === "live" ? (
             <div
@@ -105,7 +110,7 @@ export default function Home({ projects }) {
             ""
           )
         )} */}
-        {projects.map((project, i) =>
+        {/* {projects.map((project, i) =>
           project.fields.Status === "live" ? (
             <ProjectCard
               key={i}
@@ -117,7 +122,7 @@ export default function Home({ projects }) {
           ) : (
             ""
           )
-        )}
+        )} */}
       </div>
     </section>
   );

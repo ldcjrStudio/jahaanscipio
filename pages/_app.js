@@ -1,11 +1,14 @@
 import "../styles/global.scss";
 import Layout from "../components/layout";
+import ProjectProvider from "../context/projectContext";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />;
-    </Layout>
+    <ProjectProvider>
+      <Layout>
+        <Component {...pageProps} />;
+      </Layout>
+    </ProjectProvider>
   );
 }
 
