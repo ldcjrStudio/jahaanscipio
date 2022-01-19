@@ -1,5 +1,6 @@
 //CORE
 import { useRef, useState, useContext } from "react";
+import ProjectCard from "../components/ProjectCard";
 import { ProjectContext } from "../context/projectContext";
 import Head from "next/head";
 import Image from "next/image";
@@ -72,59 +73,24 @@ export default function Home({ projects }) {
   }
 
   return (
-    <section className="w-screen h-screen relative">
-      <div
+    <main className="w-screen h-screen relative">
+      <section
         id="projects-container"
         className="h-full mx-auto flex justify-center items-center flex-wrap"
       >
-        {/* <AnimateSharedLayout type="crossfade">
-          <List selectedId={id} projects={projects} />
-          <AnimatePresence>
-            {id && <Item id={id} key="item" projects={projects} />}
-          </AnimatePresence>
-        </AnimateSharedLayout> */}
-        {projects.map((project, i) =>
-          project.fields.Status === "live" ? (
-            <div
-              key={project.id}
-              className="project-item border-2 border-black bg-white relative m-6"
-              onClick={openProjectDrawer}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-              ref={(ref) => projectRef.current.push(ref)}
-            >
-              <div className="img-wrapper p-3">
-                <Image
-                  alt={project.fields.Name}
-                  src={project.fields.Images[0].url}
-                  width="175"
-                  height="175"
-                />
-              </div>
-              <div className="px-3 border-t-2 border-black bg-white">
-                {" "}
-                <p>{project.fields.Name}</p>
-              </div>
-            </div>
-          ) : (
-            ""
-          )
-        )}
-        {/* {projects.map((project, i) =>
+        {projects.map((project) =>
           project.fields.Status === "live" ? (
             <ProjectCard
-              key={i}
+              key={project.id}
+              onClick={openProjectDrawer}
               project={project}
-              disabled={expandedDay !== project && expandedDay !== undefined}
-              onExpand={() => setCollapsedDay(project)}
-              onCollapse={() => setCollapsedDay()}
             />
           ) : (
             ""
           )
-        )} */}
-      </div>
-    </section>
+        )}
+      </section>
+    </main>
   );
 }
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 //components
-import MenuIcon from "../components/icons/MenuIcon";
-import XIcon from "../components/icons/XIcon";
+import MenuIcon from "./icons/MenuIcon";
+import XIcon from "./icons/XIcon";
 
 const Header = () => {
   const [navActive, setNavActive] = useState(false);
