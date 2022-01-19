@@ -1,12 +1,13 @@
 //CORE
 import React, { useRef, useEffect } from "react";
 import getProjects from "../../lib/projects";
-import useInView from "react-cool-inview";
-import gsap from "gsap";
+// import useInView from "react-cool-inview";
+// import gsap from "gsap";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import ImageComponent from "../../components/ImageComponent";
 
-import Image from "next/image";
+// import Image from "next/image";
 import marked from "marked";
 
 //COMPONENTS
@@ -17,6 +18,9 @@ if (typeof window !== "undefined") {
 }
 
 function Project({ projectData }) {
+  const x = useMotionValue(1);
+
+  const revealCopy = useTransform(x);
   const project = projectData[0].fields;
 
   return (
@@ -58,12 +62,13 @@ function Project({ projectData }) {
         <div className="assets p-3">
           {project.Images.map((image, i) => {
             return (
-              <ImageComponent
-                key={i}
-                src={image.url}
-                width={image.width}
-                height={image.height}
-              />
+              <motion.div style={{ x }} key={i}>
+                <ImageComponent
+                  src={image.url}
+                  width={image.width}
+                  height={image.height}
+                />
+              </motion.div>
             );
           })}
         </div>

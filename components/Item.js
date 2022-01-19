@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
 
 import { useEffect, useState, useContext } from "react";
@@ -9,11 +10,14 @@ export default function Item({ id, projects }) {
 
   const [newName, setNewName] = useState(id);
   const [newImage, setNewImage] = useState("");
+  const [slug, setNewSlug] = useState("");
   useEffect(() => {
     projects.find((item) => {
       if (item.id === id) {
         setNewName(item.id);
         setNewImage(item.fields.Images[0].url);
+        setNewSlug(item.fields.Slug);
+        console.log("slug");
       }
     });
   }, [id]);
@@ -57,6 +61,10 @@ export default function Item({ id, projects }) {
           >
             close
           </h1>
+
+          <Link href={`/projects/${slug}`}>
+            <a>{slug}</a>
+          </Link>
         </motion.div>
       </div>
     </>
