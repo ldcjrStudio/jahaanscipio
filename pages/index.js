@@ -78,10 +78,10 @@ export default function Home({ projects }) {
         id="projects-container"
         className="h-full mx-auto flex justify-center items-center flex-wrap"
       >
-        {projects.map((project) =>
+        {projects.map((project, i) =>
           project.fields.Status === "live" ? (
             <ProjectCard
-              key={project.id}
+              key={i}
               onClick={openProjectDrawer}
               project={project}
             />

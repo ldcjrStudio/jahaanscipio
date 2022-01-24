@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
 
-export default function ProjectCard({ key, project }) {
+export default function ProjectCard({ project }) {
   console.log(project);
   return (
     <div
-      key={key}
+      key={project.id}
       className="project-card border-2 border-black bg-white relative m-6"
     >
       <div className="card-header">
